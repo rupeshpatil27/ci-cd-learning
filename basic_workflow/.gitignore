@@ -36,3 +36,8 @@ Thumbs.db
 
 # VS Code
 .vscode/
+
+coverage/
+
+*.dockerfile
+docker-compose.override.yml
