@@ -3,21 +3,31 @@ name: Node CI Pipeline
 on:
   push:
     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout code
       - uses: actions/checkout@v3
 
-      - name: Use Node.js
+      # Step 2: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
+      # Step 3: Install dependencies in basic-workflow folder
       - name: Install dependencies
-        run: npm install
+        run: |
+          cd basic_workflow
+          npm install
 
+      # Step 4: Run tests
       - name: Run tests
-        run: npm test
+        run: |
+          cd basic_workflow
+          npm test
