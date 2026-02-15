@@ -1,7 +1,7 @@
-const express = require('express');
+import express from "express";
 const app = express();
 
-app.get('/add', (req, res) => {
+app.get("/add", (req, res) => {
   const { a, b } = req.query;
   const result = Number(a) + Number(b);
   res.json({ result });
