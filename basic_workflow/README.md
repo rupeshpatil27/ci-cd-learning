@@ -56,3 +56,66 @@ npm test
 ```
 
 You should see PASS for the API test.
+
+# 📘 Learning Progress
+
+## ✅ Basic CI Setup
+
+### 🔹 What I Learned
+*   **Building a simple Express API**
+*   **Writing API tests** using [Jest](https://jestjs.io) + [Supertest](https://www.npmjs.com)
+*   **Creating a GitHub Actions workflow**
+*   **Running automated tests** on push & pull request
+*   **Understanding core CI concepts**
+
+### 🔹 CI Behavior
+*   **Runs on push** to `main`
+*   **Runs on pull requests**
+*   **Fails if tests fail**
+
+This was my first automated CI pipeline.
+
+---
+
+## ✅ Advanced CI Automation
+Improved the CI pipeline to follow real-world DevOps practices.
+
+### 🔹 Topics Covered
+*   Multi-job workflows
+*   Matrix builds
+*   Linting in CI
+*   Environment variables in CI
+*   Node.js version compatibility handling
+*   Debugging CI failures
+
+### 🔹 CI Improvements
+
+#### 1️⃣ Separate Jobs
+*   **lint job** → checks code quality
+*   **test job** → runs Jest tests
+*   `test` depends on `lint` using `needs`
+
+This ensures structured and reliable pipelines.
+
+#### 2️⃣ Matrix Testing
+Tests run on multiple Node versions to prevent “works on my machine” problems:
+```yaml
+strategy:
+  matrix:
+    node-version: ['20.x', '22.x']
+```
+
+#### 3️⃣ CI Workflow Logic
+Pipeline flow:
+`Push` → `Lint` → `Test (20.x & 22.x)` → `Success/Fail`
+If any job fails, the entire pipeline fails.
+
+
+# 🎯 Current CI Capabilities
+- Automated lint checks
+- Automated API testing
+- Multi-version Node testing
+- Structured multi-job workflow
+- Dependency installation inside CI
+- Version-aligned Node setup
+- CI failure debugging experience
