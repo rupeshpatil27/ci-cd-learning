@@ -1,0 +1,52 @@
+name: Code Quality Pipeline
+
+on:
+  push:
+    paths:
+      - "quality_pipeline/**"
+  pull_request:
+    paths:
+      - "quality_pipeline/**"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: quality_pipeline
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: "npm"
+
+      - run: npm install
+      - run: npm run lint
+
+  test:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: quality_pipeline
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: "npm"
+
+      - run: npm install
+      - run: npm test
+
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: quality_pipeline/coverage
