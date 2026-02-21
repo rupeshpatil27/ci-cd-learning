@@ -3,10 +3,10 @@ name: Code Quality Pipeline
 on:
   push:
     paths:
-      - "quality_pipeline/**"
+      - "2_quality_pipeline/**"
   pull_request:
     paths:
-      - "quality_pipeline/**"
+      - "2_quality_pipeline/**"
 
 jobs:
   lint:
@@ -14,7 +14,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: quality_pipeline
+        working-directory: 2_quality_pipeline
 
     steps:
       - uses: actions/checkout@v4
@@ -32,7 +32,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: quality_pipeline
+        working-directory: 2_quality_pipeline
 
     steps:
       - uses: actions/checkout@v4
@@ -40,7 +40,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22.x'
-          cache: "npm"
+          # cache: "npm"
 
       - run: npm install
       - run: npm test
@@ -49,4 +49,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
-          path: quality_pipeline/coverage
+          path: 2_quality_pipeline/coverage
