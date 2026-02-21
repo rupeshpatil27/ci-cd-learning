@@ -3,14 +3,21 @@ const app = express();
 
 app.use(express.json());
 
-app.get('/add', (req, res) => {
-  const { num1, num2 } = req.query;
-  const result = parseFloat(num1) + parseFloat(num2);
-  
-  if (isNaN(result)) {
-    return res.status(400).json({ error: "Invalid numbers provided" });
+function add(a, b) {
+  if (typeof a !== "number" || typeof b !== "number") {
+    throw new Error("Inputs must be numbers");
   }
-  res.json({ result });
+  return a + b;
+}
+
+app.post("/add", (req, res) => {
+  try {
+    const { a, b } = req.body;
+    const result = add(a, b);
+    res.json({ result });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 });
 
-module.exports = app
+module.exports = { app, add };
